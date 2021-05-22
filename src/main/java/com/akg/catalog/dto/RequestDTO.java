@@ -5,10 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreateCategoryRequestDTO {
+public class RequestDTO {
 
     private String name;
+    private String value;
     private String description;
+    private String categoryId;
 
     public String getName() {
         return name;
@@ -18,11 +20,27 @@ public class CreateCategoryRequestDTO {
         this.name = name;
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 }

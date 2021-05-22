@@ -1,8 +1,8 @@
 package com.akg.catalog.service;
 
-import com.akg.catalog.dto.CreateCategoryRequestDTO;
+import com.akg.catalog.dto.RequestDTO;
 
 public interface ICategoryService {
 
-    void createCategory(CreateCategoryRequestDTO requestDTO);
+    void createCategory(RequestDTO requestDTO);
 }

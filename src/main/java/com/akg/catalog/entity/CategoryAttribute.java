@@ -12,7 +12,7 @@ public class CategoryAttribute extends BaseEntity {
     private int categoryAttributeId;
 
     @Column(name = "ATTRIBUTE_ID")
-    private String attributeId;
+    private int attributeId;
 
     @Column(name = "ATTRIBUTE_NAME")
     private String attributeName;
@@ -21,7 +21,7 @@ public class CategoryAttribute extends BaseEntity {
     private String attributeValue;
 
     @Column(name = "CATEGORY_ID")
-    private String categoryId;
+    private int categoryId;
 
     public int getCategoryAttributeId() {
         return categoryAttributeId;
@@ -31,11 +31,11 @@ public class CategoryAttribute extends BaseEntity {
         this.categoryAttributeId = categoryAttributeId;
     }
 
-    public String getAttributeId() {
+    public int getAttributeId() {
         return attributeId;
     }
 
-    public void setAttributeId(String attributeId) {
+    public void setAttributeId(int attributeId) {
         this.attributeId = attributeId;
     }
 
@@ -55,11 +55,11 @@ public class CategoryAttribute extends BaseEntity {
         this.attributeValue = attributeValue;
     }
 
-    public String getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 

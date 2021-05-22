@@ -1,9 +1,9 @@
 package com.akg.catalog.controller;
 
-import com.akg.catalog.dto.CreateCategoryRequestDTO;
+import com.akg.catalog.dto.RequestDTO;
 import com.akg.catalog.dto.ResponseDTO;
 import com.akg.catalog.exception.ExceptionHandler;
-import com.akg.catalog.service.ICategoryService;
+import com.akg.catalog.service.IAttributeService;
 import com.akg.catalog.validator.CatalogRequestsValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class AttributeController {
     private static Logger LOGGER = LoggerFactory.getLogger(AttributeController.class);
 
     @Autowired
-    ICategoryService categoryService;
+    IAttributeService attributeService;
 
     @Autowired
     CatalogRequestsValidator catalogRequestsValidator;
@@ -31,12 +31,12 @@ public class AttributeController {
 
     @PostMapping(produces = "application/json", name = "Endpoint for Creating a new Attribute")
     public @ResponseBody
-    ResponseEntity createAttribute(@RequestBody CreateCategoryRequestDTO requestDTO) throws ValidationException {
+    ResponseEntity createAttribute(@RequestBody RequestDTO requestDTO) throws ValidationException {
 
         ResponseDTO responseDTO = null;
         try {
-            catalogRequestsValidator.validateCreateCategoryRequest(requestDTO);
-            categoryService.createCategory(requestDTO);
+            catalogRequestsValidator.validateCreateAttributeRequest(requestDTO);
+            attributeService.createAttribute(requestDTO);
         } catch (Exception ex) {
             LOGGER.error("Exception happened while creating category with name: {}", requestDTO.getName(), ex);
             responseDTO = exceptionHandler.mapAndThrow(ex);
@@ -45,19 +45,4 @@ public class AttributeController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/category", produces = "application/json", name = "Endpoint for Creating a new Category Attribute")
-    public @ResponseBody
-    ResponseEntity createCategoryAttribute(@RequestBody CreateCategoryRequestDTO requestDTO) throws ValidationException {
-
-        ResponseDTO responseDTO = null;
-        try {
-            catalogRequestsValidator.validateCreateCategoryRequest(requestDTO);
-            categoryService.createCategory(requestDTO);
-        } catch (Exception ex) {
-            LOGGER.error("Exception happened while creating category with name: {}", requestDTO.getName(), ex);
-            responseDTO = exceptionHandler.mapAndThrow(ex);
-            return new ResponseEntity<>(responseDTO, HttpStatus.valueOf(responseDTO.getCode()));
-        }
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
-    }
 }
