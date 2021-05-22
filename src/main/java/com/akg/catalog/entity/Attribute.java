@@ -43,7 +43,9 @@ public class Attribute extends BaseEntity {
 
     @PrePersist
     private void generateId() {
-        Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);
-        attributeId = code;
+        if (attributeId == 0) {
+            Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+            attributeId = code;
+        }
     }
 }

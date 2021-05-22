@@ -66,7 +66,9 @@ public class Category extends BaseEntity {
 
     @PrePersist
     private void generateId() {
-        Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);
-        categoryId = code;
+        if (categoryId == 0) {
+            Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+            categoryId = code;
+        }
     }
 }

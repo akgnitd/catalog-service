@@ -4,6 +4,7 @@ import com.akg.catalog.dto.CategoryAttributeResponseDTO;
 import com.akg.catalog.dto.ProductResponseDTO;
 import com.akg.catalog.dto.RequestDTO;
 import com.akg.catalog.entity.Category;
+import com.akg.catalog.entity.CategoryAttribute;
 import com.akg.catalog.entity.Product;
 import com.akg.catalog.exception.EntityDoesNotExistException;
 import com.akg.catalog.repository.ProductRepository;
@@ -12,6 +13,7 @@ import com.akg.catalog.transformer.CatalogTransformer;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.transaction.Transactional;
 import java.util.Date;
@@ -31,14 +33,18 @@ public class ProductServiceImpl implements IProductService {
         Product product = new Product();
         product.setProductName(requestDTO.getName());
         product.setDescription(requestDTO.getDescription());
-        product.setCategory(category);
         product.setCategoryName(category.getCategoryName());
-
+        product.setCategoryId(category.getCategoryId());
         product.setCreatedBy("Admin");
         product.setCreatedOn(new Date());
         product.setModifiedBy("Admin");
         product.setModifiedOn(new Date());
 
+        if (!CollectionUtils.isEmpty(requestDTO.getCategoryAttributes())) {
+            List<CategoryAttribute> categoryAttributes = catalogTransformer.convertToCategoryAttributesEntity(requestDTO.getCategoryAttributes(), category);
+            category.setCategoryAttributeList(categoryAttributes);
+            product.setCategory(category);
+        }
         product = productRepository.save(product);
 
         ProductResponseDTO productResponseDTO = new ProductResponseDTO();

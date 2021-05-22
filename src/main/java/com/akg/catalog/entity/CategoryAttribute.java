@@ -77,7 +77,9 @@ public class CategoryAttribute extends BaseEntity {
 
     @PrePersist
     private void generateId() {
-        Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);
-        categoryAttributeId = code;
+        if (categoryAttributeId == 0) {
+            Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+            categoryAttributeId = code;
+        }
     }
 }

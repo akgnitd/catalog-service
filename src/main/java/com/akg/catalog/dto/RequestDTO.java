@@ -3,6 +3,8 @@ package com.akg.catalog.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RequestDTO {
@@ -11,6 +13,7 @@ public class RequestDTO {
     private String value;
     private String description;
     private int categoryId;
+    private List<CategoryAttributeResponseDTO> categoryAttributes;
 
     public String getName() {
         return name;
@@ -42,5 +45,13 @@ public class RequestDTO {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public List<CategoryAttributeResponseDTO> getCategoryAttributes() {
+        return categoryAttributes;
+    }
+
+    public void setCategoryAttributes(List<CategoryAttributeResponseDTO> categoryAttributes) {
+        this.categoryAttributes = categoryAttributes;
     }
 }
