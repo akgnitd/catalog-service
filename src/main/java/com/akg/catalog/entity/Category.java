@@ -1,7 +1,6 @@
 package com.akg.catalog.entity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Entity
@@ -17,12 +16,6 @@ public class Category extends BaseEntity {
 
     @Column(name = "DESCRIPTION")
     private String categoryDescription;
-
-    @OneToMany(mappedBy = "category")
-    private List<CategoryAttribute> categoryAttributeList;
-
-    @OneToOne(mappedBy = "category")
-    private Product product;
 
     public int getCategoryId() {
         return categoryId;
@@ -46,22 +39,6 @@ public class Category extends BaseEntity {
 
     public void setCategoryDescription(String categoryDescription) {
         this.categoryDescription = categoryDescription;
-    }
-
-    public List<CategoryAttribute> getCategoryAttributeList() {
-        return categoryAttributeList;
-    }
-
-    public void setCategoryAttributeList(List<CategoryAttribute> categoryAttributeList) {
-        this.categoryAttributeList = categoryAttributeList;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     @PrePersist

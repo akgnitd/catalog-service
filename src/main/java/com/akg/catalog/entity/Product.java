@@ -23,6 +23,9 @@ public class Product extends BaseEntity {
     @Column(name = "CATEGORY_NAME")
     private String categoryName;
 
+    @Column(name = "CATEGORY_ATTRIBUTE")
+    private String categoryAttributes;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", insertable = false, updatable = false)
     private Category category;
@@ -67,12 +70,16 @@ public class Product extends BaseEntity {
         this.categoryName = categoryName;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getCategoryAttributes() {
+        return categoryAttributes;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryAttributes(String categoryAttributes) {
+        this.categoryAttributes = categoryAttributes;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     @PrePersist
