@@ -54,8 +54,10 @@ public class ProductServiceImpl implements IProductService {
         ProductResponseDTO productResponseDTO = new ProductResponseDTO();
         BeanUtils.copyProperties(product, productResponseDTO);
 
-        List<CategoryAttributeResponseDTO> categoryAttributeResponse = catalogTransformer.prepareCategoryAttributeResponse(product.getCategory().getCategoryAttributeList());
-        productResponseDTO.setCategoryAttributes(categoryAttributeResponse);
+        if (null != product.getCategory()) {
+            List<CategoryAttributeResponseDTO> categoryAttributeResponse = catalogTransformer.prepareCategoryAttributeResponse(product.getCategory().getCategoryAttributeList());
+            productResponseDTO.setCategoryAttributes(categoryAttributeResponse);
+        }
         return productResponseDTO;
     }
 }

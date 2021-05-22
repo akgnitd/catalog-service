@@ -56,6 +56,14 @@ public class Category extends BaseEntity {
         this.categoryAttributeList = categoryAttributeList;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @PrePersist
     private void generateId() {
         Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);

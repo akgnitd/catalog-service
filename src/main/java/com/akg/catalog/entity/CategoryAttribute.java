@@ -67,6 +67,14 @@ public class CategoryAttribute extends BaseEntity {
         this.attributeValue = attributeValue;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @PrePersist
     private void generateId() {
         Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);
