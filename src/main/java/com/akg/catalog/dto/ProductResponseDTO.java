@@ -1,32 +1,20 @@
-package com.akg.catalog.entity;
+package com.akg.catalog.dto;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
-@Entity
-@Table(name = "product")
-public class Product extends BaseEntity {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductResponseDTO {
 
-    @Id
-    @Column(name = "ID")
     private int productId;
-
-    @Column(name = "PRODUCT_NAME")
     private String productName;
-
-    @Column(name = "DESCRIPTION")
     private String description;
-
-    @Column(name = "CATEGORY_ID")
     private int categoryId;
-
-    @Column(name = "CATEGORY_NAME")
     private String categoryName;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGORY_ID", insertable = false, updatable = false)
-    private Category category;
+    private List<CategoryAttributeResponseDTO> categoryAttributes;
 
     public int getProductId() {
         return productId;
@@ -68,17 +56,11 @@ public class Product extends BaseEntity {
         this.categoryName = categoryName;
     }
 
-    public Category getCategory() {
-        return category;
+    public List<CategoryAttributeResponseDTO> getCategoryAttributes() {
+        return categoryAttributes;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    @PrePersist
-    private void generateId() {
-        Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);
-        productId = code;
+    public void setCategoryAttributes(List<CategoryAttributeResponseDTO> categoryAttributes) {
+        this.categoryAttributes = categoryAttributes;
     }
 }

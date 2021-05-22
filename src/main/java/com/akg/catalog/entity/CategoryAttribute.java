@@ -11,6 +11,9 @@ public class CategoryAttribute extends BaseEntity {
     @Column(name = "ID")
     private int categoryAttributeId;
 
+    @Column(name = "CATEGORY_ID")
+    private int categoryId;
+
     @Column(name = "ATTRIBUTE_ID")
     private int attributeId;
 
@@ -20,8 +23,17 @@ public class CategoryAttribute extends BaseEntity {
     @Column(name = "ATTRIBUTE_VALUE")
     private String attributeValue;
 
-    @Column(name = "CATEGORY_ID")
-    private int categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID", insertable = false, updatable = false)
+    private Category category;
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public int getCategoryAttributeId() {
         return categoryAttributeId;
@@ -53,14 +65,6 @@ public class CategoryAttribute extends BaseEntity {
 
     public void setAttributeValue(String attributeValue) {
         this.attributeValue = attributeValue;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
     }
 
     @PrePersist

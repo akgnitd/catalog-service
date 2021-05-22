@@ -1,9 +1,10 @@
 package com.akg.catalog.controller;
 
+import com.akg.catalog.dto.CategoryAttributeResponseDTO;
+import com.akg.catalog.dto.CategoryResponseDTO;
 import com.akg.catalog.dto.RequestDTO;
 import com.akg.catalog.dto.ResponseDTO;
 import com.akg.catalog.entity.Attribute;
-import com.akg.catalog.entity.CategoryAttribute;
 import com.akg.catalog.exception.ExceptionHandler;
 import com.akg.catalog.service.IAttributeService;
 import com.akg.catalog.service.ICategoryService;
@@ -40,16 +41,17 @@ public class CategoryController {
     public @ResponseBody
     ResponseEntity createCategory(@RequestBody RequestDTO requestDTO) throws ValidationException {
 
-        ResponseDTO responseDTO = null;
+        ResponseDTO responseDTO;
+        CategoryResponseDTO category;
         try {
             catalogRequestsValidator.validateCreateCategoryRequest(requestDTO);
-            categoryService.createCategory(requestDTO);
+            category = categoryService.createCategory(requestDTO);
         } catch (Exception ex) {
             LOGGER.error("Exception happened while creating category with name: {}", requestDTO.getName(), ex);
             responseDTO = exceptionHandler.mapAndThrow(ex);
             return new ResponseEntity<>(responseDTO, HttpStatus.valueOf(responseDTO.getCode()));
         }
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @PostMapping(path = "/attribute", produces = "application/json", name = "Endpoint for Creating a new Category Attribute")
@@ -73,17 +75,17 @@ public class CategoryController {
 
     @GetMapping(path = "/{categoryId}/attribute", produces = "application/json", name = "Endpoint for Health Check")
     public @ResponseBody
-    ResponseEntity getCategoryAttributes(@PathVariable("categoryId") String categoryId) {
+    ResponseEntity getCategoryAttributes(@PathVariable("categoryId") int categoryId) {
         ResponseDTO responseDTO;
-        List<CategoryAttribute> categoryAttribute;
+        List<CategoryAttributeResponseDTO> categoryResponseDTOList;
         try {
-            categoryAttribute = attributeService.getCategoryAttributes(categoryId);
+            categoryResponseDTOList = attributeService.getCategoryAttributes(categoryId);
         } catch (Exception ex) {
             LOGGER.error("Exception happened while fetching attributes for categoryId: {}", categoryId, ex);
             responseDTO = exceptionHandler.mapAndThrow(ex);
             return new ResponseEntity<>(responseDTO, HttpStatus.valueOf(responseDTO.getCode()));
         }
-        return new ResponseEntity<>(categoryAttribute, HttpStatus.OK);
+        return new ResponseEntity<>(categoryResponseDTOList, HttpStatus.OK);
     }
 
 }

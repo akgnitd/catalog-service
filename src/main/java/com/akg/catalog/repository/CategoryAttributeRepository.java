@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CategoryAttributeRepository extends JpaRepository<CategoryAttribute, String> {
+public interface CategoryAttributeRepository extends JpaRepository<CategoryAttribute, Integer> {
 
-    List<CategoryAttribute> findByCategoryId(String categoryId);
+    List<CategoryAttribute> findByCategoryId(int categoryId);
 
     CategoryAttribute findByAttributeName(String attributeName);
 

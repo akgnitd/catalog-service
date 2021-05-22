@@ -1,9 +1,11 @@
 package com.akg.catalog.service.impl;
 
+import com.akg.catalog.dto.CategoryResponseDTO;
 import com.akg.catalog.dto.RequestDTO;
 import com.akg.catalog.entity.Category;
 import com.akg.catalog.repository.CategoryRepository;
 import com.akg.catalog.service.ICategoryService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ public class CategoryServiceImpl implements ICategoryService {
     CategoryRepository categoryRepository;
 
     @Transactional
-    public void createCategory(RequestDTO requestDTO) {
+    public CategoryResponseDTO createCategory(RequestDTO requestDTO) {
 
         Category category = new Category();
         category.setCategoryName(requestDTO.getName());
@@ -27,6 +29,10 @@ public class CategoryServiceImpl implements ICategoryService {
         category.setModifiedBy("Admin");
         category.setModifiedOn(new Date());
 
-        categoryRepository.save(category);
+        category = categoryRepository.save(category);
+
+        CategoryResponseDTO categoryResponseDTO = new CategoryResponseDTO();
+        BeanUtils.copyProperties(category, categoryResponseDTO);
+        return categoryResponseDTO;
     }
 }

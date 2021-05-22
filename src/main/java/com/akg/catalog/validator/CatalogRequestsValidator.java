@@ -68,7 +68,7 @@ public class CatalogRequestsValidator {
         if (!StringUtils.hasText(requestDTO.getName())) {
             throw new ValidationException("Product Name cannot be null or blank");
         }
-        if (!StringUtils.hasText(requestDTO.getCategoryId())) {
+        if (requestDTO.getCategoryId() == 0) {
             throw new ValidationException("Category ID cannot be null or blank");
         }
         Category category = categoryRepository.findById(requestDTO.getCategoryId()).orElse(null);

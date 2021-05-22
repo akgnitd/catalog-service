@@ -10,7 +10,7 @@ public class RequestDTO {
     private String name;
     private String value;
     private String description;
-    private String categoryId;
+    private int categoryId;
 
     public String getName() {
         return name;
@@ -36,11 +36,11 @@ public class RequestDTO {
         this.description = description;
     }
 
-    public String getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 }

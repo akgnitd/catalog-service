@@ -1,9 +1,9 @@
 package com.akg.catalog.controller;
 
+import com.akg.catalog.dto.ProductResponseDTO;
 import com.akg.catalog.dto.RequestDTO;
 import com.akg.catalog.dto.ResponseDTO;
 import com.akg.catalog.entity.Category;
-import com.akg.catalog.entity.CategoryAttribute;
 import com.akg.catalog.entity.Product;
 import com.akg.catalog.exception.ExceptionHandler;
 import com.akg.catalog.service.IProductService;
@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.bind.ValidationException;
 import java.util.List;
 
 @RestController
@@ -35,33 +34,34 @@ public class ProductController {
 
     @PostMapping(produces = "application/json", name = "Endpoint for Creating a new Product")
     public @ResponseBody
-    ResponseEntity createProduct(@RequestBody RequestDTO requestDTO) throws ValidationException {
+    ResponseEntity createProduct(@RequestBody RequestDTO requestDTO) {
 
         ResponseDTO responseDTO = null;
+        ProductResponseDTO productResponse;
         try {
             Category category = catalogRequestsValidator.validateCreateProductRequest(requestDTO);
-            productService.linkAndCreateProduct(category, requestDTO);
+            productResponse = productService.linkAndCreateProduct(category, requestDTO);
         } catch (Exception ex) {
             LOGGER.error("Exception happened while creating product with name: {}", requestDTO.getName(), ex);
             responseDTO = exceptionHandler.mapAndThrow(ex);
             return new ResponseEntity<>(responseDTO, HttpStatus.valueOf(responseDTO.getCode()));
         }
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{productId}", produces = "application/json", name = "Endpoint for Fetching Product Info by ProductId")
     public @ResponseBody
-    ResponseEntity getProductById(@PathVariable("productId") String productId) {
+    ResponseEntity getProductById(@PathVariable("productId") int productId) {
         ResponseDTO responseDTO;
-        Product product;
+        ProductResponseDTO productResponse;
         try {
-            product = productService.getProduct(productId);
+            productResponse = productService.getProduct(productId);
         } catch (Exception ex) {
             LOGGER.error("Exception happened while fetching product info for productId: {}", productId, ex);
             responseDTO = exceptionHandler.mapAndThrow(ex);
             return new ResponseEntity<>(responseDTO, HttpStatus.valueOf(responseDTO.getCode()));
         }
-        return new ResponseEntity<>(product, HttpStatus.OK);
+        return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
 
 }
