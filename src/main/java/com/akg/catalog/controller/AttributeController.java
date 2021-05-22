@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.bind.ValidationException;
 
 @RestController
-@RequestMapping("/category")
-public class CategoryController {
+@RequestMapping("/attribute")
+public class AttributeController {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(AttributeController.class);
 
     @Autowired
     ICategoryService categoryService;
@@ -29,9 +29,9 @@ public class CategoryController {
     @Autowired
     ExceptionHandler exceptionHandler;
 
-    @PostMapping(produces = "application/json", name = "Endpoint for Creating a new Category")
+    @PostMapping(produces = "application/json", name = "Endpoint for Creating a new Attribute")
     public @ResponseBody
-    ResponseEntity createCategory(@RequestBody CreateCategoryRequestDTO requestDTO) throws ValidationException {
+    ResponseEntity createAttribute(@RequestBody CreateCategoryRequestDTO requestDTO) throws ValidationException {
 
         ResponseDTO responseDTO = null;
         try {
@@ -45,7 +45,7 @@ public class CategoryController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/attribute", produces = "application/json", name = "Endpoint for Creating a new Category Attribute")
+    @PostMapping(path = "/category", produces = "application/json", name = "Endpoint for Creating a new Category Attribute")
     public @ResponseBody
     ResponseEntity createCategoryAttribute(@RequestBody CreateCategoryRequestDTO requestDTO) throws ValidationException {
 

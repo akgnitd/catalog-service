@@ -21,6 +21,10 @@ public class ExceptionHandler {
             code = HttpStatus.NOT_FOUND.value();
             message = HttpStatus.NOT_FOUND.toString();
             responseDTO = new ResponseDTO(message, code, e.getMessage());
+        } else if (e.getClass().isAssignableFrom(ConflictException.class)) {
+            code = HttpStatus.CONFLICT.value();
+            message = HttpStatus.CONFLICT.toString();
+            responseDTO = new ResponseDTO(message, code, e.getMessage());
         } else {
             responseDTO = new ResponseDTO(message, code, e.getMessage());
         }
