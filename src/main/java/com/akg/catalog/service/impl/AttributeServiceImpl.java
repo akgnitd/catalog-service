@@ -1,7 +1,7 @@
 package com.akg.catalog.service.impl;
 
 import com.akg.catalog.dto.CategoryAttributeResponseDTO;
-import com.akg.catalog.dto.RequestDTO;
+import com.akg.catalog.dto.CommonRequestDTO;
 import com.akg.catalog.entity.Attribute;
 import com.akg.catalog.entity.CategoryAttribute;
 import com.akg.catalog.exception.EntityDoesNotExistException;
@@ -30,12 +30,12 @@ public class AttributeServiceImpl implements IAttributeService {
     CatalogTransformer catalogTransformer;
 
     @Transactional
-    public void mapAttributeWithCategory(Attribute attribute, RequestDTO requestDTO) {
+    public void mapAttributeWithCategory(Attribute attribute, CommonRequestDTO commonRequestDTO) {
         CategoryAttribute categoryAttribute = new CategoryAttribute();
-        categoryAttribute.setCategoryId(requestDTO.getCategoryId());
+        categoryAttribute.setCategoryId(commonRequestDTO.getCategoryId());
         categoryAttribute.setAttributeId(attribute.getAttributeId());
         categoryAttribute.setAttributeName(attribute.getAttributeName());
-        categoryAttribute.setAttributeValue(requestDTO.getValue());
+        categoryAttribute.setAttributeValue(commonRequestDTO.getValue());
         categoryAttribute.setCreatedBy("Admin");
         categoryAttribute.setCreatedOn(new Date());
         categoryAttribute.setModifiedBy("Admin");
@@ -45,10 +45,10 @@ public class AttributeServiceImpl implements IAttributeService {
     }
 
     @Transactional
-    public Attribute createAttribute(RequestDTO requestDTO) {
+    public Attribute createAttribute(CommonRequestDTO commonRequestDTO) {
         Attribute attribute = new Attribute();
-        attribute.setAttributeName(requestDTO.getName());
-        attribute.setAttributeDescription(requestDTO.getDescription());
+        attribute.setAttributeName(commonRequestDTO.getName());
+        attribute.setAttributeDescription(commonRequestDTO.getDescription());
         attribute.setCreatedBy("Admin");
         attribute.setCreatedOn(new Date());
         attribute.setModifiedBy("Admin");

@@ -1,6 +1,6 @@
 package com.akg.catalog.controller;
 
-import com.akg.catalog.dto.RequestDTO;
+import com.akg.catalog.dto.CommonRequestDTO;
 import com.akg.catalog.dto.ResponseDTO;
 import com.akg.catalog.exception.ExceptionHandler;
 import com.akg.catalog.service.IAttributeService;
@@ -31,14 +31,14 @@ public class AttributeController {
 
     @PostMapping(produces = "application/json", name = "Endpoint for Creating a new Attribute")
     public @ResponseBody
-    ResponseEntity createAttribute(@RequestBody RequestDTO requestDTO) throws ValidationException {
+    ResponseEntity createAttribute(@RequestBody CommonRequestDTO commonRequestDTO) throws ValidationException {
 
         ResponseDTO responseDTO = null;
         try {
-            catalogRequestsValidator.validateCreateAttributeRequest(requestDTO);
-            attributeService.createAttribute(requestDTO);
+            catalogRequestsValidator.validateCreateAttributeRequest(commonRequestDTO);
+            attributeService.createAttribute(commonRequestDTO);
         } catch (Exception ex) {
-            LOGGER.error("Exception happened while creating category with name: {}", requestDTO.getName(), ex);
+            LOGGER.error("Exception happened while creating category with name: {}", commonRequestDTO.getName(), ex);
             responseDTO = exceptionHandler.mapAndThrow(ex);
             return new ResponseEntity<>(responseDTO, HttpStatus.valueOf(responseDTO.getCode()));
         }

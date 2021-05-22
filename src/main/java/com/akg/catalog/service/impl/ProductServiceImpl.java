@@ -2,7 +2,7 @@ package com.akg.catalog.service.impl;
 
 import com.akg.catalog.dto.CategoryAttributeResponseDTO;
 import com.akg.catalog.dto.ProductResponseDTO;
-import com.akg.catalog.dto.RequestDTO;
+import com.akg.catalog.dto.CommonRequestDTO;
 import com.akg.catalog.entity.Category;
 import com.akg.catalog.entity.CategoryAttribute;
 import com.akg.catalog.entity.Product;
@@ -38,10 +38,10 @@ public class ProductServiceImpl implements IProductService {
     CategoryAttributeRepository categoryAttributeRepository;
 
     @Transactional
-    public ProductResponseDTO linkAndCreateProduct(Category category, RequestDTO requestDTO) throws IOException {
+    public ProductResponseDTO linkAndCreateProduct(Category category, CommonRequestDTO commonRequestDTO) throws IOException {
         Product product = new Product();
-        product.setProductName(requestDTO.getName());
-        product.setDescription(requestDTO.getDescription());
+        product.setProductName(commonRequestDTO.getName());
+        product.setDescription(commonRequestDTO.getDescription());
         product.setCategoryName(category.getCategoryName());
         product.setCategoryId(category.getCategoryId());
         product.setCreatedBy("Admin");
@@ -49,9 +49,9 @@ public class ProductServiceImpl implements IProductService {
         product.setModifiedBy("Admin");
         product.setModifiedOn(new Date());
 
-        if (!CollectionUtils.isEmpty(requestDTO.getCategoryAttributes())) {
+        if (!CollectionUtils.isEmpty(commonRequestDTO.getCategoryAttributes())) {
             List<CategoryAttribute> categoryAttributeList = categoryAttributeRepository.findByCategoryId(category.getCategoryId());
-            List<CategoryAttribute> categoryAttributes = catalogTransformer.convertToCategoryAttributesEntity(requestDTO.getCategoryAttributes(), categoryAttributeList);
+            List<CategoryAttribute> categoryAttributes = catalogTransformer.convertToCategoryAttributesEntity(commonRequestDTO.getCategoryAttributes(), categoryAttributeList);
             product.setCategoryAttributes(JsonUtils.objectToJson(categoryAttributes));
         }
         product = productRepository.save(product);

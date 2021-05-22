@@ -1,6 +1,6 @@
 package com.akg.catalog.validator;
 
-import com.akg.catalog.dto.RequestDTO;
+import com.akg.catalog.dto.CommonRequestDTO;
 import com.akg.catalog.entity.Attribute;
 import com.akg.catalog.entity.Category;
 import com.akg.catalog.entity.CategoryAttribute;
@@ -31,49 +31,49 @@ public class CatalogRequestsValidator {
     @Autowired
     CategoryAttributeRepository categoryAttributeRepository;
 
-    public void validateCreateCategoryRequest(RequestDTO requestDTO) throws ValidationException {
+    public void validateCreateCategoryRequest(CommonRequestDTO commonRequestDTO) throws ValidationException {
 
-        if (!StringUtils.hasText(requestDTO.getName())) {
+        if (!StringUtils.hasText(commonRequestDTO.getName())) {
             throw new ValidationException("Category Name cannot be null or blank");
         }
-        Category category = categoryRepository.findByCategoryName(requestDTO.getName());
+        Category category = categoryRepository.findByCategoryName(commonRequestDTO.getName());
         if (null != category) {
-            throw new ConflictException(String.format("Category: [%s] is already present", requestDTO.getName()));
+            throw new ConflictException(String.format("Category: [%s] is already present", commonRequestDTO.getName()));
         }
     }
 
-    public void validateCreateAttributeRequest(RequestDTO requestDTO) throws ValidationException {
-        if (!StringUtils.hasText(requestDTO.getName())) {
+    public void validateCreateAttributeRequest(CommonRequestDTO commonRequestDTO) throws ValidationException {
+        if (!StringUtils.hasText(commonRequestDTO.getName())) {
             throw new ValidationException("Attribute Name cannot be null or blank");
         }
-        Attribute attribute = attributeRepository.findByAttributeName(requestDTO.getName());
+        Attribute attribute = attributeRepository.findByAttributeName(commonRequestDTO.getName());
         if (null != attribute) {
-            throw new ConflictException(String.format("Attribute: [%s] is already present", requestDTO.getName()));
+            throw new ConflictException(String.format("Attribute: [%s] is already present", commonRequestDTO.getName()));
         }
     }
 
-    public Attribute validateCreateCategoryAttributeRequest(RequestDTO requestDTO) throws ValidationException {
-        if (!StringUtils.hasText(requestDTO.getName())) {
+    public Attribute validateCreateCategoryAttributeRequest(CommonRequestDTO commonRequestDTO) throws ValidationException {
+        if (!StringUtils.hasText(commonRequestDTO.getName())) {
             throw new ValidationException("Attribute Name cannot be null or blank");
         }
-        CategoryAttribute categoryAttribute = categoryAttributeRepository.findByAttributeName(requestDTO.getName());
+        CategoryAttribute categoryAttribute = categoryAttributeRepository.findByAttributeName(commonRequestDTO.getName());
         if (null != categoryAttribute) {
-            throw new ConflictException(String.format("Attribute: [%s] is already present", requestDTO.getName()));
+            throw new ConflictException(String.format("Attribute: [%s] is already present", commonRequestDTO.getName()));
         }
-        Attribute attribute = attributeRepository.findByAttributeName(requestDTO.getName());
+        Attribute attribute = attributeRepository.findByAttributeName(commonRequestDTO.getName());
         return attribute;
     }
 
-    public Category validateCreateProductRequest(RequestDTO requestDTO) throws ValidationException {
-        if (!StringUtils.hasText(requestDTO.getName())) {
+    public Category validateCreateProductRequest(CommonRequestDTO commonRequestDTO) throws ValidationException {
+        if (!StringUtils.hasText(commonRequestDTO.getName())) {
             throw new ValidationException("Product Name cannot be null or blank");
         }
-        if (requestDTO.getCategoryId() == 0) {
+        if (commonRequestDTO.getCategoryId() == 0) {
             throw new ValidationException("Category ID cannot be null or blank");
         }
-        Category category = categoryRepository.findById(requestDTO.getCategoryId()).orElse(null);
+        Category category = categoryRepository.findById(commonRequestDTO.getCategoryId()).orElse(null);
         if (null == category) {
-            throw new EntityDoesNotExistException(String.format("To be linked Category: [%s] not found", requestDTO.getName()));
+            throw new EntityDoesNotExistException(String.format("To be linked Category: [%s] not found", commonRequestDTO.getName()));
         }
         return category;
     }

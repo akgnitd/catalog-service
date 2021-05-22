@@ -7,7 +7,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RequestDTO {
+public class CommonRequestDTO {
 
     private String name;
     private String value;
