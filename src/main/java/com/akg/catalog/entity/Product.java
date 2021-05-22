@@ -78,7 +78,7 @@ public class Product extends BaseEntity {
 
     @PrePersist
     private void generateId() {
-        Integer code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+        Integer code = ThreadLocalRandom.current().nextInt(10000000, 100000000);
         productId = code;
     }
 }
