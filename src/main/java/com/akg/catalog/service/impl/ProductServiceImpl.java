@@ -1,8 +1,8 @@
 package com.akg.catalog.service.impl;
 
 import com.akg.catalog.dto.CategoryAttributeResponseDTO;
-import com.akg.catalog.dto.ProductResponseDTO;
 import com.akg.catalog.dto.CommonRequestDTO;
+import com.akg.catalog.dto.ProductResponseDTO;
 import com.akg.catalog.entity.Category;
 import com.akg.catalog.entity.CategoryAttribute;
 import com.akg.catalog.entity.Product;

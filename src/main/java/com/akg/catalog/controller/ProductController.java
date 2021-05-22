@@ -2,7 +2,6 @@ package com.akg.catalog.controller;
 
 import com.akg.catalog.dto.ProductRequestDTO;
 import com.akg.catalog.dto.ProductResponseDTO;
-import com.akg.catalog.dto.CommonRequestDTO;
 import com.akg.catalog.dto.ResponseDTO;
 import com.akg.catalog.entity.Category;
 import com.akg.catalog.exception.ExceptionHandler;
