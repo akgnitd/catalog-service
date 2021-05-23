@@ -1,16 +1,16 @@
 package com.akg.catalog.service;
 
 import com.akg.catalog.dto.CategoryAttributeResponseDTO;
-import com.akg.catalog.dto.RequestDTO;
+import com.akg.catalog.dto.CommonRequestDTO;
 import com.akg.catalog.entity.Attribute;
 
 import java.util.List;
 
 public interface IAttributeService {
 
-    Attribute createAttribute(RequestDTO requestDTO);
+    Attribute createAttribute(CommonRequestDTO commonRequestDTO);
 
-    void mapAttributeWithCategory(Attribute attribute, RequestDTO requestDTO);
+    void mapAttributeWithCategory(Attribute attribute, CommonRequestDTO commonRequestDTO);
 
     List<CategoryAttributeResponseDTO> getCategoryAttributes(int categoryId);
 }

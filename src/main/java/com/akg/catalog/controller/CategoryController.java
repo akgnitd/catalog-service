@@ -2,7 +2,7 @@ package com.akg.catalog.controller;
 
 import com.akg.catalog.dto.CategoryAttributeResponseDTO;
 import com.akg.catalog.dto.CategoryResponseDTO;
-import com.akg.catalog.dto.RequestDTO;
+import com.akg.catalog.dto.CommonRequestDTO;
 import com.akg.catalog.dto.ResponseDTO;
 import com.akg.catalog.entity.Attribute;
 import com.akg.catalog.exception.ExceptionHandler;
@@ -39,15 +39,15 @@ public class CategoryController {
 
     @PostMapping(produces = "application/json", name = "Endpoint for Creating a new Category")
     public @ResponseBody
-    ResponseEntity createCategory(@RequestBody RequestDTO requestDTO) throws ValidationException {
+    ResponseEntity createCategory(@RequestBody CommonRequestDTO commonRequestDTO) throws ValidationException {
 
         ResponseDTO responseDTO;
         CategoryResponseDTO category;
         try {
-            catalogRequestsValidator.validateCreateCategoryRequest(requestDTO);
-            category = categoryService.createCategory(requestDTO);
+            catalogRequestsValidator.validateCreateCategoryRequest(commonRequestDTO);
+            category = categoryService.createCategory(commonRequestDTO);
         } catch (Exception ex) {
-            LOGGER.error("Exception happened while creating category with name: {}", requestDTO.getName(), ex);
+            LOGGER.error("Exception happened while creating category with name: {}", commonRequestDTO.getName(), ex);
             responseDTO = exceptionHandler.mapAndThrow(ex);
             return new ResponseEntity<>(responseDTO, HttpStatus.valueOf(responseDTO.getCode()));
         }
@@ -56,17 +56,17 @@ public class CategoryController {
 
     @PostMapping(path = "/attribute", produces = "application/json", name = "Endpoint for Creating a new Category Attribute")
     public @ResponseBody
-    ResponseEntity createCategoryAttribute(@RequestBody RequestDTO requestDTO) throws ValidationException {
+    ResponseEntity createCategoryAttribute(@RequestBody CommonRequestDTO commonRequestDTO) throws ValidationException {
 
         ResponseDTO responseDTO = null;
         try {
-            Attribute attribute = catalogRequestsValidator.validateCreateCategoryAttributeRequest(requestDTO);
+            Attribute attribute = catalogRequestsValidator.validateCreateCategoryAttributeRequest(commonRequestDTO);
             if (null == attribute) {
-                attribute = attributeService.createAttribute(requestDTO);
+                attribute = attributeService.createAttribute(commonRequestDTO);
             }
-            attributeService.mapAttributeWithCategory(attribute, requestDTO);
+            attributeService.mapAttributeWithCategory(attribute, commonRequestDTO);
         } catch (Exception ex) {
-            LOGGER.error("Exception happened while creating category attribute with name: {}", requestDTO.getName(), ex);
+            LOGGER.error("Exception happened while creating category attribute with name: {}", commonRequestDTO.getName(), ex);
             responseDTO = exceptionHandler.mapAndThrow(ex);
             return new ResponseEntity<>(responseDTO, HttpStatus.valueOf(responseDTO.getCode()));
         }

@@ -1,7 +1,7 @@
 package com.akg.catalog.service.impl;
 
 import com.akg.catalog.dto.CategoryResponseDTO;
-import com.akg.catalog.dto.RequestDTO;
+import com.akg.catalog.dto.CommonRequestDTO;
 import com.akg.catalog.entity.Category;
 import com.akg.catalog.repository.CategoryRepository;
 import com.akg.catalog.service.ICategoryService;
@@ -19,11 +19,11 @@ public class CategoryServiceImpl implements ICategoryService {
     CategoryRepository categoryRepository;
 
     @Transactional
-    public CategoryResponseDTO createCategory(RequestDTO requestDTO) {
+    public CategoryResponseDTO createCategory(CommonRequestDTO commonRequestDTO) {
 
         Category category = new Category();
-        category.setCategoryName(requestDTO.getName());
-        category.setCategoryDescription(requestDTO.getDescription());
+        category.setCategoryName(commonRequestDTO.getName());
+        category.setCategoryDescription(commonRequestDTO.getDescription());
         category.setCreatedBy("Admin");
         category.setCreatedOn(new Date());
         category.setModifiedBy("Admin");
