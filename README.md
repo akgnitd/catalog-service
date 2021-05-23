@@ -26,17 +26,14 @@ Once Application is running, hit below url
 In case, swagger doesn't open up, please use these curl requests:
 
 ## Health Check API
-`curl -X GET \
-  http://localhost:8080/ `
+`curl --request GET \
+  --url http://localhost:8080/`
   
 ## Create a Category
-curl -X POST \
-  http://localhost:8080/category/ \
-  -H 'content-type: application/json' \
-  -d '{
-	"name": "Cloth",
-	"description": "Wear"
-}'
+`curl --request POST \
+  --url http://localhost:8080/category/ \
+  --header 'content-type: application/json' \
+  --data '{\n "name": "Cloth",\n "description": "Wear"\n}'`
 
 ## Create Category Attributes
 curl -X POST \
