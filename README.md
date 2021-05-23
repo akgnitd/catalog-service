@@ -35,7 +35,7 @@ In case, swagger doesn't open up, please use these curl requests:
   --header 'content-type: application/json' 
   --data '{\n "name": "Cloth",\n "description": "Wear"\n}'`
   
-NOTE:- After Category is Created, Please keep the categoryId for Creating Category Attributes and for linking product to category
+NOTE:- After Category is Created, Please save the categoryId that you received in response for Creating Category Attributes and for linking product to category
 
 ## Create Category Attributes
 `curl -X POST 
@@ -69,7 +69,7 @@ NOTE:- After Category is Created, Please keep the categoryId for Creating Catego
   ]
 }'`
 
-NOTE:- After Product is Created, Please keep the productId for fetching productInfo by productId
+NOTE:- After Product is Created, Please save the productId that you received in response for fetching productInfo by productId
 
 ## Get Product By ID
 `curl -X GET 
