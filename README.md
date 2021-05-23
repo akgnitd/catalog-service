@@ -26,33 +26,33 @@ Once Application is running, hit below url
 In case, swagger doesn't open up, please use these curl requests:
 
 ## Health Check API
-`curl --request GET \
+`curl --request GET 
   --url http://localhost:8080/`
   
 ## Create a Category
-`curl --request POST \
-  --url http://localhost:8080/category/ \
-  --header 'content-type: application/json' \
+`curl --request POST 
+  --url http://localhost:8080/category/ 
+  --header 'content-type: application/json' 
   --data '{\n "name": "Cloth",\n "description": "Wear"\n}'`
 
 ## Create Category Attributes
-curl -X POST \
-  http://localhost:8080/category/attribute \
-  -H 'content-type: application/json' \
+`curl -X POST 
+  http://localhost:8080/category/attribute 
+  -H 'content-type: application/json' 
   -d '{
 	"name": "Color",
 	"description": "Color of Cloth",
 	"categoryId": 711577
-}'
+}'`
 
 ## Get Category Attributes By Category ID
-curl -X GET \
-  http://localhost:8080/category/711577/attribute
+`curl -X GET 
+  http://localhost:8080/category/711577/attribute`
   
 ## Create a Product by linking it to a Category and its attributes
-curl -X POST \
-  http://localhost:8080/product \
-  -H 'content-type: application/json' \
+`curl -X POST 
+  http://localhost:8080/product 
+  -H 'content-type: application/json' 
   -d '{
   "name": "Wrangler Shirt",
   "description": "Clothing Item",
@@ -65,8 +65,8 @@ curl -X POST \
       "attributeValue": "BLACK"
     }
   ]
-}'
+}'`
 
 ## Get Product By ID
-curl -X GET \
-  http://localhost:8080/product/92403996
+`curl -X GET 
+  http://localhost:8080/product/92403996`
