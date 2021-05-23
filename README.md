@@ -21,4 +21,4 @@ Once this command execution is completed, please go inside the /target folder an
   
 # API Documentation - provided by Swagger2
 Once Application is running, hit below url
-`http://localhost:8080/swagger-ui/#/product-controller`
+`http://localhost:8080/swagger-ui/#/`
