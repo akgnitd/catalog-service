@@ -30,30 +30,30 @@ In case, swagger doesn't open up, please use these curl requests:
   http://localhost:8080/ `
   
 ## Create a Category
-`curl -X POST \
+curl -X POST \
   http://localhost:8080/category/ \
   -H 'content-type: application/json' \
   -d '{
 	"name": "Cloth",
 	"description": "Wear"
-}'`
+}'
 
 ## Create Category Attributes
-`curl -X POST \
+curl -X POST \
   http://localhost:8080/category/attribute \
   -H 'content-type: application/json' \
   -d '{
 	"name": "Color",
 	"description": "Color of Cloth",
 	"categoryId": 711577
-}'`
+}'
 
 ## Get Category Attributes By Category ID
-`curl -X GET \
-  http://localhost:8080/category/711577/attribute`
+curl -X GET \
+  http://localhost:8080/category/711577/attribute
   
 ## Create a Product by linking it to a Category and its attributes
-`curl -X POST \
+curl -X POST \
   http://localhost:8080/product \
   -H 'content-type: application/json' \
   -d '{
@@ -68,8 +68,8 @@ In case, swagger doesn't open up, please use these curl requests:
       "attributeValue": "BLACK"
     }
   ]
-}'`
+}'
 
 ## Get Product By ID
-`curl -X GET \
-  http://localhost:8080/product/92403996`
+curl -X GET \
+  http://localhost:8080/product/92403996
