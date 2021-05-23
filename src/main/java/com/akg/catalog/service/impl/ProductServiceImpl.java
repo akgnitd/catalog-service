@@ -1,7 +1,7 @@
 package com.akg.catalog.service.impl;
 
 import com.akg.catalog.dto.CategoryAttributeResponseDTO;
-import com.akg.catalog.dto.CommonRequestDTO;
+import com.akg.catalog.dto.ProductRequestDTO;
 import com.akg.catalog.dto.ProductResponseDTO;
 import com.akg.catalog.entity.Category;
 import com.akg.catalog.entity.CategoryAttribute;
@@ -38,7 +38,7 @@ public class ProductServiceImpl implements IProductService {
     CategoryAttributeRepository categoryAttributeRepository;
 
     @Transactional
-    public ProductResponseDTO linkAndCreateProduct(Category category, CommonRequestDTO commonRequestDTO) throws IOException {
+    public ProductResponseDTO linkAndCreateProduct(Category category, ProductRequestDTO commonRequestDTO) throws IOException {
         Product product = new Product();
         product.setProductName(commonRequestDTO.getName());
         product.setDescription(commonRequestDTO.getDescription());
