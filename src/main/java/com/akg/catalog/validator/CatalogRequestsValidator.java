@@ -1,6 +1,7 @@
 package com.akg.catalog.validator;
 
 import com.akg.catalog.dto.CommonRequestDTO;
+import com.akg.catalog.dto.ProductRequestDTO;
 import com.akg.catalog.entity.Attribute;
 import com.akg.catalog.entity.Category;
 import com.akg.catalog.entity.CategoryAttribute;
@@ -64,7 +65,7 @@ public class CatalogRequestsValidator {
         return attribute;
     }
 
-    public Category validateCreateProductRequest(CommonRequestDTO commonRequestDTO) throws ValidationException {
+    public Category validateCreateProductRequest(ProductRequestDTO commonRequestDTO) throws ValidationException {
         if (!StringUtils.hasText(commonRequestDTO.getName())) {
             throw new ValidationException("Product Name cannot be null or blank");
         }
