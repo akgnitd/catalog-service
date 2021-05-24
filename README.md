@@ -33,7 +33,7 @@ In case, swagger doesn't open up, please use these curl requests:
 `curl --request POST 
   --url http://localhost:8080/category/ 
   --header 'content-type: application/json' 
-  --data '{\n "name": "Cloth",\n "description": "Wear"\n}'`
+  --data '{"name": "Cloth", "description": "Wear"}'`
   
 NOTE:- After Category is Created, Please save the categoryId that you received in response for Creating Category Attributes and for linking product to category
 
